@@ -27,7 +27,6 @@ I am running it in Ubuntu Server 22.04; I also tested this setup on a [Synology 
   * [Jellyfin](#jellyfin)
   * [Homepage](#homepage)
   * [Jellyseerr](#jellyseerr)
-  * [Traefik and SSL Certificates](#traefik-and-ssl-certificates)
     * [Accessing from the outside with Tailscale](#accessing-from-the-outside-with-tailscale)
   * [Optional Services](#optional-services)
     * [FlareSolverr](#flaresolverr)
@@ -68,7 +67,6 @@ I am running it in Ubuntu Server 22.04; I also tested this setup on a [Synology 
 | [Jellyfin](https://jellyfin.org)                                   | Media server designed to organize, manage, and share digital media files to networked devices                                                        | [linuxserver/jellyfin](https://hub.docker.com/r/linuxserver/jellyfin)                    | /jellyfin    |
 | [Jellyseer](https://jellyfin.org)                                  | Manages requests for your media library                                                                                                              | [fallenbagel/jellyseerr](https://hub.docker.com/r/fallenbagel/jellyseerr)                | /jellyseer   |
 | [Homepage](https://gethomepage.dev)                                | Application dashboard                                                                                                                                | [gethomepage/homepage](https://github.com/gethomepage/homepage/pkgs/container/homepage)  | /            |
-| [Traefik](https://traefik.io)                                      | Reverse proxy                                                                                                                                        | [traefik](https://hub.docker.com/_/traefik)                                              |              |
 | [Watchtower](https://containrrr.dev/watchtower/)                   | Automated Docker images update                                                                                                                       | [containrrr/watchtower](https://hub.docker.com/r/containrrr/watchtower)                  |              |
 | [Autoheal](https://github.com/willfarrell/docker-autoheal/)        | Monitor and restart unhealthy Docker containers                                                                                                      | [willfarrell/autoheal](https://hub.docker.com/r/willfarrell/autoheal)                    |              |
 | [Lidarr](https://lidarr.audio)                                     | Optional - Music collection manager for Usenet and BitTorrent users<br/>Enable with `COMPOSE_PROFILES=lidarr`                                        | [linuxserver/lidarr](https://hub.docker.com/r/linuxserver/lidarr)                        | /lidarr      |
@@ -112,14 +110,7 @@ If you want to show Jellyfin information in the homepage, create it in Jellyfin 
 | `ADGUARD_USERNAME`             | Optional - AdGuard Home username to show details in the homepage, if enabled                                                                                                                           |                                                  |
 | `ADGUARD_PASSWORD`             | Optional - AdGuard Home password to show details in the homepage, if enabled                                                                                                                           |                                                  |
 | `QBITTORRENT_USERNAME`         | qBittorrent username to access the web UI                                                                                                                                                              | `admin`                                          |
-| `QBITTORRENT_PASSWORD`         | qBittorrent password to access the web UI                                                                                                                                                              | `adminadmin`                                     |
-| `DNS_CHALLENGE`                | Enable/Disable DNS01 challenge, set to `false` to disable.                                                                                                                                             | `true`                                           |
-| `DNS_CHALLENGE_PROVIDER`       | Provider for DNS01 challenge, [see list here](https://doc.traefik.io/traefik/https/acme/#providers).                                                                                                   | `cloudflare`                                     |
-| `LETS_ENCRYPT_CA_SERVER`       | Let's Encrypt CA Server used to generate certificates, set to production by default.<br/>Set to `https://acme-staging-v02.api.letsencrypt.org/directory` to test your changes with the staging server. | `https://acme-v02.api.letsencrypt.org/directory` |
-| `LETS_ENCRYPT_EMAIL`           | E-mail address used to send expiration notifications                                                                                                                                                   |                                                  |
-| `CLOUDFLARE_EMAIL`             | CloudFlare Account email                                                                                                                                                                               |                                                  |
-| `CLOUDFLARE_DNS_API_TOKEN`     | API token with `DNS:Edit` permission                                                                                                                                                                   |                                                  |
-| `CLOUDFLARE_ZONE_API_TOKEN`    | API token with `Zone:Read` permission                                                                                                                                                                  |                                                  |
+| `QBITTORRENT_PASSWORD`         | qBittorrent password to access the web UI                                                                                                                                                              | `adminadmin`                                     |                                                                                              | `cloudflare`                                     |
 | `SONARR_API_KEY`               | Sonarr API key to show information in the homepage                                                                                                                                                     |                                                  |
 | `RADARR_API_KEY`               | Radarr API key to show information in the homepage                                                                                                                                                     |                                                  |
 | `LIDARR_API_KEY`               | Lidarr API key to show information in the homepage                                                                                                                                                     |                                                  |
@@ -257,44 +248,6 @@ To setup, go to https://hostname/jellyseerr/setup, and set the URLs as follows:
   - Port: 8989
   - URL Base: /sonarr
 
-## Traefik and SSL Certificates
-
-While you can use the private IP to access your NAS, how cool would it be for it to be accessible through a subdomain
-with a valid SSL certificate?
-
-Traefik makes this trivial by using Let's Encrypt and one of its
-[supported ACME challenge providers](https://doc.traefik.io/traefik/https/acme).
-
-Let's assume we are using `nas.domain.com` as custom subdomain.
-
-The idea is to create an A record pointing to the private IP of the NAS, `192.168.0.10` for example:
-```
-nas.domain.com.	1	IN	A	192.168.0.10
-```
-
-The record will be publicly exposed but not resolve given this is a private IP.
-
-Given the NAS is not accessible from the internet, we need to do a dnsChallenge.
-Here we will be using CloudFlare, but the mechanism will be the same for all DNS providers
-baring environment variable changes, see the Traefik documentation above and [Lego's documentation](https://go-acme.github.io/lego/dns).
-
-Then, fill the CloudFlare `.env` entries.
-
-If you want to test your configuration first, use the Let's Encrypt staging server by updating `LETS_ENCRYPT_CA_SERVER`'s
-value in `.env`:
-```
-LETS_ENCRYPT_CA_SERVER=https://acme-staging-v02.api.letsencrypt.org/directory
-```
-
-If it worked, you will see the staging certificate at https://nas.domain.com.
-You may remove the `./letsencrypt/acme.json` file and restart the services to issue the real certificate.
-
-You are free to use any DNS01 provider. Simply replace `DNS_CHALLENGE_PROVIDER` with your own provider, 
-[see complete list here](https://doc.traefik.io/traefik/https/acme/#providers). 
-You will also need to inject the environments variables specific to your provider.
-
-Certificate generation can be disabled by setting `DNS_CHALLENGE` to `false`.
-
 ### Accessing from the outside with Tailscale
 
 If we want to make it reachable from outside the network without opening ports or exposing it to the internet, I found
@@ -347,11 +300,6 @@ On first run, specify the port 3000 and enable listen on all interfaces to make 
 If after running `docker compose up -d`, you're getting `network docker-compose-nas declared as external, but could not be found`,
 run `docker network create docker-compose-nas` first.
 
-#### Encryption
-
-In Settings > Encryption Settings, set the certificates path to `/opt/adguardhome/certs/certs/<YOUR_HOSTNAME>.crt`
-and the private key to `/opt/adguardhome/certs/private/<YOUR_HOSTNAME>.key`, those files are created by Traefik cert dumper
-from the ACME certificates Traefik generates in JSON.
 
 #### DHCP
 
