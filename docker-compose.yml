@@ -310,7 +310,14 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${DATA_ROOT}:/data
     restart: always
-    command: [sh, -c, "cp -n /app/config/tpl/*.yaml /app/config && node server.js"]
+# These next portions are currently broken in the official image. I'm currently playing around with them and seeing what I can do to fix it
+#    command: [sh, -c, "cp -n /app/config/tpl/*.yaml /app/config && node server.js"]
+    command: [sh, -c, "cp -n /nas/homepage/bookmarks.yaml /app/config && node server.js"]
+    command: [sh, -c, "cp -n /nas/homepage/docker.yaml /app/config && node server.js"]
+    command: [sh, -c, "cp -n /nas/homepage/kubernetes.yaml /app/config && node server.js"]
+    command: [sh, -c, "cp -n /nas/homepage/services.yaml /app/config && node server.js"]
+    command: [sh, -c, "cp -n /nas/homepage/settings.yaml /app/config && node server.js"]
+    command: [sh, -c, "cp -n /nas/homepage/widgets.yaml /app/config && node server.js"]
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
