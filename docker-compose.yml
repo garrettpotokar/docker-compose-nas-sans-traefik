@@ -14,16 +14,16 @@ services:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:8989/sonarr/ping" ]
       interval: 30s
       retries: 10
-    labels:
-      - homepage.group=Media
-      - homepage.name=Sonarr
-      - homepage.icon=sonarr.png
-      - homepage.href=/sonarr
-      - homepage.description=Series management
-      - homepage.weight=0
-      - homepage.widget.type=sonarr
-      - homepage.widget.url=http://sonarr:8989/sonarr
-      - homepage.widget.key=${SONARR_API_KEY}
+#    labels:
+#      - homepage.group=Media
+#      - homepage.name=Sonarr
+#      - homepage.icon=sonarr.png
+#      - homepage.href=/sonarr
+#      - homepage.description=Series management
+#      - homepage.weight=0
+#      - homepage.widget.type=sonarr
+#      - homepage.widget.url=http://sonarr:8989/sonarr
+#      - homepage.widget.key=${SONARR_API_KEY}
   radarr:
     image: lscr.io/linuxserver/radarr
     container_name: radarr
@@ -39,16 +39,16 @@ services:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:7878/radarr/ping" ]
       interval: 30s
       retries: 10
-    labels:
-      - homepage.group=Media
-      - homepage.name=Radarr
-      - homepage.icon=radarr.png
-      - homepage.href=/radarr
-      - homepage.description=Movies management
-      - homepage.weight=1
-      - homepage.widget.type=radarr
-      - homepage.widget.url=http://radarr:7878/radarr
-      - homepage.widget.key=${RADARR_API_KEY}
+#    labels:
+#      - homepage.group=Media
+#      - homepage.name=Radarr
+#      - homepage.icon=radarr.png
+#      - homepage.href=/radarr
+#      - homepage.description=Movies management
+#      - homepage.weight=1
+#      - homepage.widget.type=radarr
+#      - homepage.widget.url=http://radarr:7878/radarr
+#      - homepage.widget.key=${RADARR_API_KEY}
   lidarr:
     image: lscr.io/linuxserver/lidarr
     container_name: lidarr
@@ -64,16 +64,16 @@ services:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:8686/lidarr/ping" ]
       interval: 30s
       retries: 10
-    labels:
-      - homepage.group=Media
-      - homepage.name=Lidarr
-      - homepage.icon=lidarr.png
-      - homepage.href=/lidarr
-      - homepage.description=Music management
-      - homepage.weight=2
-      - homepage.widget.type=lidarr
-      - homepage.widget.url=http://lidarr:8686/lidarr
-      - homepage.widget.key=${LIDARR_API_KEY}
+#   labels:
+#     - homepage.group=Media
+#      - homepage.name=Lidarr
+#      - homepage.icon=lidarr.png
+#      - homepage.href=/lidarr
+#      - homepage.description=Music management
+#      - homepage.weight=2
+#      - homepage.widget.type=lidarr
+#      - homepage.widget.url=http://lidarr:8686/lidarr
+#      - homepage.widget.key=${LIDARR_API_KEY}
     profiles:
       - lidarr
   bazarr:
@@ -91,16 +91,16 @@ services:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:6767/bazarr/ping" ]
       interval: 5s
       retries: 10
-    labels:
-      - homepage.group=Download
-      - homepage.name=Bazarr
-      - homepage.icon=bazarr.png
-      - homepage.href=/bazarr
-      - homepage.description=Subtitles management
-      - homepage.weight=4
-      - homepage.widget.type=bazarr
-      - homepage.widget.url=http://bazarr:6767/bazarr
-      - homepage.widget.key=${BAZARR_API_KEY}
+#    labels:
+#      - homepage.group=Download
+#      - homepage.name=Bazarr
+#      - homepage.icon=bazarr.png
+#      - homepage.href=/bazarr
+#      - homepage.description=Subtitles management
+#      - homepage.weight=4
+#      - homepage.widget.type=bazarr
+#      - homepage.widget.url=http://bazarr:6767/bazarr
+#      - homepage.widget.key=${BAZARR_API_KEY}
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
@@ -114,16 +114,16 @@ services:
       test: ["CMD", "wget", "http://127.0.0.1:5055/api/v1/status", "-qO", "/dev/null"]
       interval: 30s
       retries: 10
-    labels:
-      - homepage.group=Media
-      - homepage.name=JellySeerr
-      - homepage.icon=jellyseerr.png
-      - homepage.href=/jellyseerr
-      - homepage.description=Content Recommendations and Request Management
-      - homepage.weight=2
-      - homepage.widget.type=jellyseerr
-      - homepage.widget.url=http://jellyseerr:5055
-      - homepage.widget.key=${JELLYSEERR_API_KEY}
+#    labels:
+#      - homepage.group=Media
+#      - homepage.name=JellySeerr
+#      - homepage.icon=jellyseerr.png
+#      - homepage.href=/jellyseerr
+#      - homepage.description=Content Recommendations and Request Management
+#      - homepage.weight=2
+#      - homepage.widget.type=jellyseerr
+#      - homepage.widget.url=http://jellyseerr:5055
+#      - homepage.widget.key=${JELLYSEERR_API_KEY}
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
@@ -138,16 +138,16 @@ services:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:9696/prowlarr/ping" ]
       interval: 30s
       retries: 10
-    labels:
-      - homepage.group=Download
-      - homepage.name=Prowlarr
-      - homepage.icon=prowlarr.png
-      - homepage.href=/prowlarr
-      - homepage.description=Indexers management
-      - homepage.weight=1
-      - homepage.widget.type=prowlarr
-      - homepage.widget.url=http://prowlarr:9696/prowlarr
-      - homepage.widget.key=${PROWLARR_API_KEY}
+#   labels:
+#      - homepage.group=Download
+#      - homepage.name=Prowlarr
+#      - homepage.icon=prowlarr.png
+#      - homepage.href=/prowlarr
+#      - homepage.description=Indexers management
+#      - homepage.weight=1
+#      - homepage.widget.type=prowlarr
+#      - homepage.widget.url=http://prowlarr:9696/prowlarr
+#      - homepage.widget.key=${PROWLARR_API_KEY}
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
@@ -182,17 +182,17 @@ services:
     depends_on:
       vpn:
         condition: service_healthy
-    labels:
-      - homepage.group=Download
-      - homepage.name=qBittorrent
-      - homepage.icon=qbittorrent.png
-      - homepage.href=/qbittorrent
-      - homepage.description=Bittorrent client
-      - homepage.weight=2
-      - homepage.widget.type=qbittorrent
-      - homepage.widget.url=http://vpn:8080
-      - homepage.widget.username=${QBITTORRENT_USERNAME}
-      - homepage.widget.password=${QBITTORRENT_PASSWORD}
+#    labels:
+#      - homepage.group=Download
+#      - homepage.name=qBittorrent
+#      - homepage.icon=qbittorrent.png
+#      - homepage.href=/qbittorrent
+#      - homepage.description=Bittorrent client
+#      - homepage.weight=2
+#      - homepage.widget.type=qbittorrent
+#      - homepage.widget.url=http://vpn:8080
+#      - homepage.widget.username=${QBITTORRENT_USERNAME}
+#      - homepage.widget.password=${QBITTORRENT_PASSWORD}
   vpn:
     image: thrnz/docker-wireguard-pia
     container_name: vpn
@@ -252,16 +252,16 @@ services:
       - ${CONFIG_ROOT:-.}/sabnzbd:/config
       - ${DATA_ROOT}:/data
     restart: always
-    labels:
-      - homepage.group=Download
-      - homepage.name=Sabnzbd
-      - homepage.icon=sabnzbd.png
-      - homepage.href=/sabnzbd
-      - homepage.description=Usenet
-      - homepage.weight=3
-      - homepage.widget.type=sabnzbd
-      - homepage.widget.url=http://sabnzbd:8080/sabnzbd
-      - homepage.widget.key=${SABNZBD_API_KEY}
+#    labels:
+#      - homepage.group=Download
+#      - homepage.name=Sabnzbd
+#      - homepage.icon=sabnzbd.png
+#      - homepage.href=/sabnzbd
+#      - homepage.description=Usenet
+#      - homepage.weight=3
+#      - homepage.widget.type=sabnzbd
+#      - homepage.widget.url=http://sabnzbd:8080/sabnzbd
+#      - homepage.widget.key=${SABNZBD_API_KEY}
     profiles:
       - sabnzbd
   jellyfin:
@@ -283,41 +283,41 @@ services:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:8096/jellyfin/health" ]
       interval: 30s
       retries: 10
-    labels:
-      - homepage.group=Media
-      - homepage.name=Jellyfin
-      - homepage.icon=jellyfin.png
-      - homepage.href=/jellyfin
-      - homepage.description=Media server
-      - homepage.weight=3
-      - homepage.widget.type=jellyfin
-      - homepage.widget.url=http://jellyfin:8096/jellyfin
-      - homepage.widget.key=${JELLYFIN_API_KEY}
-  homepage:
-    image: ghcr.io/gethomepage/homepage:latest
-    container_name: homepage
-    environment:
-      - HOMEPAGE_VAR_TITLE=${HOMEPAGE_VAR_TITLE}
-      - HOMEPAGE_VAR_SEARCH_PROVIDER=${HOMEPAGE_VAR_SEARCH_PROVIDER}
-      - HOMEPAGE_VAR_HEADER_STYLE=${HOMEPAGE_VAR_HEADER_STYLE}
-      - HOMEPAGE_VAR_WEATHER_CITY=${HOMEPAGE_VAR_WEATHER_CITY}
-      - HOMEPAGE_VAR_WEATHER_LAT=${HOMEPAGE_VAR_WEATHER_LAT}
-      - HOMEPAGE_VAR_WEATHER_LONG=${HOMEPAGE_VAR_WEATHER_LONG}
-      - HOMEPAGE_VAR_WEATHER_TIME=${TIMEZONE}
-      - HOMEPAGE_VAR_WEATHER_UNIT=${HOMEPAGE_VAR_WEATHER_UNIT}
-    volumes:
-      - ${CONFIG_ROOT:-.}/homepage:/app/config
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${DATA_ROOT}:/data
-    restart: always
+#   labels:
+#     - homepage.group=Media
+#      - homepage.name=Jellyfin
+#      - homepage.icon=jellyfin.png
+#      - homepage.href=/jellyfin
+#      - homepage.description=Media server
+#      - homepage.weight=3
+#      - homepage.widget.type=jellyfin
+#      - homepage.widget.url=http://jellyfin:8096/jellyfin
+#      - homepage.widget.key=${JELLYFIN_API_KEY}
+#  homepage:
+#    image: ghcr.io/gethomepage/homepage:latest
+#    container_name: homepage
+#    environment:
+#      - HOMEPAGE_VAR_TITLE=${HOMEPAGE_VAR_TITLE}
+#      - HOMEPAGE_VAR_SEARCH_PROVIDER=${HOMEPAGE_VAR_SEARCH_PROVIDER}
+#      - HOMEPAGE_VAR_HEADER_STYLE=${HOMEPAGE_VAR_HEADER_STYLE}
+#      - HOMEPAGE_VAR_WEATHER_CITY=${HOMEPAGE_VAR_WEATHER_CITY}
+#      - HOMEPAGE_VAR_WEATHER_LAT=${HOMEPAGE_VAR_WEATHER_LAT}
+#      - HOMEPAGE_VAR_WEATHER_LONG=${HOMEPAGE_VAR_WEATHER_LONG}
+#      - HOMEPAGE_VAR_WEATHER_TIME=${TIMEZONE}
+#      - HOMEPAGE_VAR_WEATHER_UNIT=${HOMEPAGE_VAR_WEATHER_UNIT}
+#    volumes:
+#      - ${CONFIG_ROOT:-.}/homepage:/app/config
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#      - ${DATA_ROOT}:/data
+#    restart: always
 # These next portions are currently broken in the official image. I'm currently playing around with them and seeing what I can do to fix it
 #    command: [sh, -c, "cp -n /app/config/tpl/*.yaml /app/config && node server.js"]
-    command: [sh, -c, "cp -n /nas/homepage/bookmarks.yaml /app/config && node server.js"]
-    command: [sh, -c, "cp -n /nas/homepage/docker.yaml /app/config && node server.js"]
-    command: [sh, -c, "cp -n /nas/homepage/kubernetes.yaml /app/config && node server.js"]
-    command: [sh, -c, "cp -n /nas/homepage/services.yaml /app/config && node server.js"]
-    command: [sh, -c, "cp -n /nas/homepage/settings.yaml /app/config && node server.js"]
-    command: [sh, -c, "cp -n /nas/homepage/widgets.yaml /app/config && node server.js"]
+#    command: [sh, -c, "cp -n /nas/homepage/bookmarks.yaml /app/config && node server.js"]
+#    command: [sh, -c, "cp -n /nas/homepage/docker.yaml /app/config && node server.js"]
+#    command: [sh, -c, "cp -n /nas/homepage/kubernetes.yaml /app/config && node server.js"]
+#    command: [sh, -c, "cp -n /nas/homepage/services.yaml /app/config && node server.js"]
+#    command: [sh, -c, "cp -n /nas/homepage/settings.yaml /app/config && node server.js"]
+#    command: [sh, -c, "cp -n /nas/homepage/widgets.yaml /app/config && node server.js"]
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
